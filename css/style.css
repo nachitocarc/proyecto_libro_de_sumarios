@@ -1,0 +1,60 @@
+/* registro usuarios, listado de sumarios (abrirlos), buscador de sumario(filtrado), sumario adjunto, creacion de sumario  */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0b1f3f;
+  background-image: url('../img/escudo_comisaria.png');
+  background-size: 650px;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.div_inicio_sesion {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+.div_inicio_sesion h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#label_ni {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+#numero_identificatorio {
+  width: 281px;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#boton_iniciar {
+  width: 100%;
+  padding: 10px;
+  background: #007BFF;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#logo_h1{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: -20px;
+  margin-left: 10px;
+}
