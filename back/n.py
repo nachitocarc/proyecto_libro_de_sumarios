@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient # type: ignore
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -10,6 +10,7 @@ mongo_policia = "mongodb://localhost:27017/"
 client = MongoClient(mongo_policia)
 db = client["policia"]
 coleccion_sumariantes = db['sumariantes']
+coleccion_hechos = db['hechos']
 
 """ @app.route('/api/sumariantes', methods=['GET'])
 resultados = coleccion_sumariantes.find()
@@ -17,16 +18,20 @@ for r in resultados:
     print(r["nombre"]) """
     
 @app.route('/api/sumariantes', methods=['GET'])
-def get_productos():
+def get_sumariantes():
     sumariantes = list(coleccion_sumariantes.find({}, {'_id': 0}))
     return jsonify(sumariantes)
 
+@app.route('/api/hechos', methods=['GET'])
+def get_hechos():
+    hechos = list(coleccion_hechos.find({}, {'_id': 0}))
+    return jsonify(hechos)
+
+sumariante3 = {"nombre": "edgardo", "ni": "888", "edad": 40}
+
+
+coleccion_sumariantes.insert_one(sumariante3) 
+
 if __name__ == '__main__':
     app.run(debug=True)
-"""
-sumariante1 = {"nombre": "nacho", "ni": "123", "edad": 21}
-sumariante2 = {"nombre": "ema", "ni": "1234", "edad": 35}
-
-coleccion_sumariantes.insert_many([sumariante1, sumariante2]) 
-"""
 
