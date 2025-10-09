@@ -11,11 +11,6 @@ client = MongoClient(mongo_policia)
 db = client["policia"]
 coleccion_sumariantes = db['sumariantes']
 coleccion_hechos = db['hechos']
-
-""" @app.route('/api/sumariantes', methods=['GET'])
-resultados = coleccion_sumariantes.find()
-for r in resultados:
-    print(r["nombre"]) """
     
 @app.route('/api/sumariantes', methods=['GET'])
 def get_sumariantes():
@@ -26,6 +21,13 @@ def get_sumariantes():
 def get_hechos():
     hechos = list(coleccion_hechos.find({}, {'_id': 0}))
     return jsonify(hechos)
+
+@app.route('/api/hechos', methods=['POST'])
+def add_hecho():
+    valor_hecho = request.json
+    coleccion_hechos.insert_one(valor_hecho)
+    return jsonify({"message": "Hecho agregado exitosamente"}), 201
+
 
 sumariante3 = {"nombre": "edgardo", "ni": "888", "edad": 40}
 
