@@ -17,6 +17,13 @@ def get_sumariantes():
     sumariantes = list(coleccion_sumariantes.find({}, {'_id': 0}))
     return jsonify(sumariantes)
 
+@app.route('/api/sumariantes', methods=['POST'])
+def add_sumariante():
+    valor_sumariante = request.json
+    edad_sumariante = request.json
+    coleccion_sumariantes.insert_one(valor_sumariante, edad_sumariante)
+    return jsonify({"message": "Sumariante agregado exitosamente"}), 201
+
 @app.route('/api/hechos', methods=['GET'])
 def get_hechos():
     hechos = list(coleccion_hechos.find({}, {'_id': 0}))

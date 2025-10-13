@@ -7,13 +7,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     contenedor.innerHTML = '<p>No hay sumariantes.</p>';
                     return;
                 }
-                const filas = data.map(s => `${s.nombre} ${s.edad} <input type="button" value="Eliminar sumariante">`);
+                const filas = data.map(s => `<div>${s.nombre} ${s.edad} <input type="button" value="Eliminar sumariante"> </div>`);
                 contenedor.innerHTML = filas.join('<br>');
-                
-                
             })
             .catch(error => {
                 console.error('Ocurrió un error:', error);
                 document.getElementById('lista_sumariantes_div').textContent = 'Error al cargar los datos.';
             });
 });
+
