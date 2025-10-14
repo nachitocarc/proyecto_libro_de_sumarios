@@ -19,9 +19,15 @@ def get_sumariantes():
 
 @app.route('/api/sumariantes', methods=['POST'])
 def add_sumariante():
-    valor_sumariante = request.json
-    edad_sumariante = request.json
-    coleccion_sumariantes.insert_one(valor_sumariante, edad_sumariante)
+    data = request.json
+
+    nuevo_sumariante = { 
+    "nombre": data.get("nombre"),
+    "edad" : data.get("edad"),
+    "ni" : data.get("ni_sumariante")
+    }
+   
+    coleccion_sumariantes.insert_one(nuevo_sumariante)
     return jsonify({"message": "Sumariante agregado exitosamente"}), 201
 
 @app.route('/api/hechos', methods=['GET'])
@@ -34,12 +40,6 @@ def add_hecho():
     valor_hecho = request.json
     coleccion_hechos.insert_one(valor_hecho)
     return jsonify({"message": "Hecho agregado exitosamente"}), 201
-
-
-sumariante3 = {"nombre": "edgardo", "ni": "888", "edad": 40}
-
-
-coleccion_sumariantes.insert_one(sumariante3) 
 
 if __name__ == '__main__':
     app.run(debug=True)
