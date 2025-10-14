@@ -12,10 +12,12 @@ db = client["policia"]
 coleccion_sumariantes = db['sumariantes']
 coleccion_hechos = db['hechos']
     
+    
 @app.route('/api/sumariantes', methods=['GET'])
 def get_sumariantes():
     sumariantes = list(coleccion_sumariantes.find({}, {'_id': 0}))
     return jsonify(sumariantes)
+
 
 @app.route('/api/sumariantes', methods=['POST'])
 def add_sumariante():
@@ -30,10 +32,22 @@ def add_sumariante():
     coleccion_sumariantes.insert_one(nuevo_sumariante)
     return jsonify({"message": "Sumariante agregado exitosamente"}), 201
 
+
+@app.route('/api/sumariantes', methods=['DELETE'])
+def delete_sumariante():
+    ni_sumariante = request.json.get("ni_sumariante")
+    resultado = coleccion_sumariantes.delete_one({"ni": ni_sumariante})
+    if resultado.deleted_count > 0:
+        return jsonify({"message": "Sumariante eliminado exitosamente"}), 200
+    else:
+        return jsonify({"message": "Sumariante no encontrado"}), 404
+
+
 @app.route('/api/hechos', methods=['GET'])
 def get_hechos():
     hechos = list(coleccion_hechos.find({}, {'_id': 0}))
     return jsonify(hechos)
+
 
 @app.route('/api/hechos', methods=['POST'])
 def add_hecho():
@@ -41,6 +55,6 @@ def add_hecho():
     coleccion_hechos.insert_one(valor_hecho)
     return jsonify({"message": "Hecho agregado exitosamente"}), 201
 
+
 if __name__ == '__main__':
     app.run(debug=True)
-

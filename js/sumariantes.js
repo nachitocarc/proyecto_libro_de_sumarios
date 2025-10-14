@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const filas = data.map(s => `
-                <div class="sumariante_fila">
-                    ${s.nombre} ${s.edad}
+                <div class="sumariante_fila" data-ni="${s.ni}">
+                    ${s.nombre} ${s.edad} años
                     <button onclick="eliminarSumariante(this)">Eliminar sumariante</button>
                 </div>
             `);
@@ -30,8 +30,8 @@ function agregarSumariantePopUp() {
     const ni_sumariante = prompt("Ingrese el número de identificación del sumariante:");
 
     if (nombre && edad && ni_sumariante) {
-        const nuevoSumariante = {   
-            nombre: nombre, 
+        const nuevoSumariante = {
+            nombre: nombre,
             edad: parseInt(edad),
             ni_sumariante: ni_sumariante
         };
@@ -41,18 +41,18 @@ function agregarSumariantePopUp() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(nuevoSumariante)
         })
-        .then(response => {
-            if (!response.ok) throw new Error("Error al agregar sumariante");
-            return response.json();
-        })
-        .then(data => {  
-            alert("Sumariante agregado exitosamente.");
-            location.reload();
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("No se pudo agregar el sumariante.");
-        });
+            .then(response => {
+                if (!response.ok) throw new Error("Error al agregar sumariante");
+                return response.json();
+            })
+            .then(data => {
+                alert("Sumariante agregado exitosamente.");
+                location.reload();
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("No se pudo agregar el sumariante.");
+            });
 
     } else {
         alert("Todos los campos son obligatorios.");
@@ -61,17 +61,29 @@ function agregarSumariantePopUp() {
 
 function eliminarSumariante(boton) {
     const fila = boton.closest('.sumariante_fila');
-    if (fila) {
-        fila.remove();
+    const niSumariante = fila.dataset.ni;
+
+    if (!niSumariante) {
+        alert("No se encontró el sumariante.");
+        return;
     }
 
     fetch('http://127.0.0.1:5000/api/sumariantes', {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre: fila.textContent.trim().split(' ')[0] })
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ni_sumariante: niSumariante })
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("Error al eliminar sumariante");
+            return response.json();
         })
-        .then(response => { if (!response.ok) throw new Error("Error al eliminar sumariante"); return response.json(); })
-        .then(data => { alert("Sumariante eliminado exitosamente.");  })
-        .catch(error => { console.error("Error:", error); alert("No se pudo eliminar el sumariante.");
+        .then(data => {
+            alert(data.message);
+            fila.remove();
         })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("No se pudo eliminar el sumariante.");
+        })
+        setTimeout(() => { location.reload(); }, 500);
 }
