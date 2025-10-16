@@ -55,6 +55,15 @@ def add_hecho():
     coleccion_hechos.insert_one(valor_hecho)
     return jsonify({"message": "Hecho agregado exitosamente"}), 201
 
+@app.route('/api/hechos', methods=['DELETE'])
+def delete_hecho():
+    nombre_hecho = request.json.get("nombre")
+    resultado = coleccion_hechos.delete_one({"nombre": nombre_hecho})
+    if resultado.deleted_count > 0:
+        return jsonify({"message": "Hecho eliminado exitosamente"}), 200
+    else:
+        return jsonify({"message": "Hecho no encontrado"}), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)
