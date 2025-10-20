@@ -66,8 +66,6 @@ function eliminar_hecho(boton) {
         return;
     }
 
-    if (!confirm(`¿Seguro que querés eliminar el hecho "${nombreHecho}"?`)) return;
-
     fetch('http://127.0.0.1:5000/api/hechos', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
