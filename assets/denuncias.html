@@ -6,28 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Denucias</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="../css/denuncias.css">
 </head>
 
 <body>
-    <label for=""></label>
-    <input type="text" placeholder="ingrese la fecha" id="input_fecha">
-    <br>
-    <input type="text" placeholder="ingrese el lugar" id="input_lugar">
-    <br>
-    <select name="Hechos" id="select_hechos">
-        <option value="disabled">Seleccione un hecho</option>
-    </select>
-    <br>
-    <select name="Fiscalia/juzgado" id="select_fiscalia_juzgado" >
-        <option value="Fiscalia/juzgado">no se</option>
-        <option value="Fiscalia">Fiscalía</option>
-        <option value="Juzgado">Juzgado</option>
-    </select>
-    <br>
-    <input type="text" placeholder="ingrese observaciones" id="input_observaciones">
-    <br>
-    <p>sumariante</p>
+    <button id="abrir_modal">Nueva denuncia</button>
+
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal_contenido">
+            <div class="modal_nombre">
+                <h3>Nueva denuncia</h3>
+                <span class="cerrar" id="cerrar_modal">&times;</span>
+            </div>
+
+            <label for="input_fecha">Fecha</label>
+            <input type="text" placeholder="Ingrese la fecha" id="input_fecha">
+            <br>
+            <br>
+            <label for="input_lugar">Lugar</label>
+            <input type="text" placeholder="Ingrese el lugar" id="input_lugar">
+            <br>
+            <br>
+            <label for="select_hechos">Hechos</label>
+            <select id="select_hechos">
+                <option value="disabled">Seleccione un hecho</option>
+                <option value="Robo">Robo</option>
+                <option value="Hurto">Hurto</option>
+                <option value="Otro">Otro</option>
+            </select>
+            <br>
+            <br>
+            <label for="select_fiscalia_juzgado">Fiscalía / Juzgado</label>
+            <select id="select_fiscalia_juzgado">
+                <option value="Fiscalía">Fiscalía</option>
+                <option value="Juzgado">Juzgado</option>
+            </select>
+            <br>
+            <br>
+            <label for="input_observaciones">Observaciones</label>
+            <input type="text" placeholder="Ingrese observaciones" id="input_observaciones">
+            <br>
+            <br>
+            <p>Sumariante</p>
+
+            <button>Guardar denuncia</button>
+        </div>
 </body>
+<script src="../js/denuncias.js" defer></script>
 
 </html>
