@@ -11,7 +11,7 @@ client = MongoClient(mongo_policia)
 db = client["policia"]
 coleccion_sumariantes = db['sumariantes']
 coleccion_hechos = db['hechos']
-    
+coleccion_denuncias = db['denuncias']
     
 @app.route('/api/sumariantes', methods=['GET'])
 def get_sumariantes():
@@ -63,6 +63,30 @@ def delete_hecho():
         return jsonify({"message": "Hecho eliminado exitosamente"}), 200
     else:
         return jsonify({"message": "Hecho no encontrado"}), 404
+
+
+@app.route('/api/denuncias', methods=['POST'])
+def add_denuncia():
+    data = request.json
+
+    nueva_denuncia = { 
+    "fecha_denuncia": data.get("fecha_denuncia"),
+    "lugar_denuncia" : data.get("lugar_denuncia"),
+    "hecho_denuncia" : data.get("hecho_denuncia"),
+    "observaciones" : data.get("observaciones"),
+    "victima" : data.get("victima"),
+    "imputado" : data.get("imputado"),
+    "fiscalia_juzgado" : data.get("fiscalia_juzgado"),
+    "detenido" : data.get("detenido")
+    }
+   
+    coleccion_denuncias.insert_one(nueva_denuncia)
+    return jsonify({"message": "Denuncia agregada exitosamente"}), 201
+
+@app.route('/api/denuncias', methods=['GET'])
+def get_denuncias():
+    denuncias = list(coleccion_denuncias.find({}, {'_id': 0}))
+    return jsonify(denuncias)
 
 
 if __name__ == '__main__':

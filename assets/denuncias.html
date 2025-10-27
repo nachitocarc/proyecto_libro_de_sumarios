@@ -12,45 +12,66 @@
 <body>
     <button id="abrir_modal">Nueva denuncia</button>
 
-    <div id="modal" class="modal" style="display: none;">
-        <div class="modal_contenido">
-            <div class="modal_nombre">
-                <h3>Nueva denuncia</h3>
-                <span class="cerrar" id="cerrar_modal">&times;</span>
-            </div>
-
-            <label for="input_fecha">Fecha</label>
-            <input type="text" placeholder="Ingrese la fecha" id="input_fecha">
-            <br>
-            <br>
-            <label for="input_lugar">Lugar</label>
-            <input type="text" placeholder="Ingrese el lugar" id="input_lugar">
-            <br>
-            <br>
-            <label for="select_hechos">Hechos</label>
-            <select id="select_hechos">
-                <option value="disabled">Seleccione un hecho</option>
-                <option value="Robo">Robo</option>
-                <option value="Hurto">Hurto</option>
-                <option value="Otro">Otro</option>
-            </select>
-            <br>
-            <br>
-            <label for="select_fiscalia_juzgado">Fiscalía / Juzgado</label>
-            <select id="select_fiscalia_juzgado">
-                <option value="Fiscalía">Fiscalía</option>
-                <option value="Juzgado">Juzgado</option>
-            </select>
-            <br>
-            <br>
-            <label for="input_observaciones">Observaciones</label>
-            <input type="text" placeholder="Ingrese observaciones" id="input_observaciones">
-            <br>
-            <br>
-            <p>Sumariante</p>
-
-            <button>Guardar denuncia</button>
+    <div id="denuncias_contenedor">
+        <h2>Denuncias</h2>
+        <div id="denuncias_lista">
         </div>
+    </div>
+    <form action="">
+        <div id="modal" class="modal" style="display: none;">
+            <div class="modal_contenido">
+                <div class="modal_nombre">
+                    <h3>Nueva denuncia</h3>
+                    <span class="cerrar" id="cerrar_modal">&times;</span>
+                </div>
+
+                <label for="input_fecha">Fecha</label>
+                <input type="date" id="input_fecha">
+                <br>
+                <br>
+                <label for="input_lugar">Lugar</label>
+                <input type="text" placeholder="Ingrese el lugar" id="input_lugar">
+                <br>
+                <br>
+                <label for="input_victima">Victima</label>
+                <input type="text" placeholder="Ingrese la Victima" id="input_victima">
+                <br>
+                <br>
+                <label for="input_imputado">Imputado</label>
+                <input type="text" placeholder="Ingrese el Imputado" id="input_imputado">
+                <br>
+                <br>
+                <label for="select_hechos">Hechos</label>
+                <select id="select_hechos">
+                    <option value="disabled">Seleccione un hecho</option>
+                </select>
+                <br>
+                <br>
+                <label for="select_detenido">Detenido</label>
+                <select id="select_detenido">
+                    <option value="disabled">Seleccione una opción</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+                <br>
+                <br>
+                <label for="select_fiscalia_juzgado">Fiscalía / Juzgado</label>
+                <select id="select_fiscalia_juzgado">
+                    <option value="Fiscalía">Fiscalía</option>
+                    <option value="Juzgado">Juzgado</option>
+                </select>
+                <br>
+                <br>
+                <label for="input_observaciones">Observaciones</label>
+                <textarea id="input_observaciones" placeholder="Ingrese observaciones"></textarea>
+
+                <br>
+                <br>
+                <p>Sumariante</p>
+
+                <input type="button" value="REGISTRAR DENUNCIA" id="registrar_denuncia" onclick="registrarDenuncia()">
+            </div>
+    </form>
 </body>
 <script src="../js/denuncias.js" defer></script>
 
