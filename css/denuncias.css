@@ -104,7 +104,6 @@ input {
 .denuncia_card:hover {
     transform: translateY(-5px);
     box-shadow: 2px 6px 4px 3px rgba(14, 15, 83, 0.596);
-
 }
 
 .denuncia_header {
