@@ -37,18 +37,20 @@
         <p><strong>Detenido:</strong> ${data.detenido}</p>
         ${data.observaciones ? `<p><strong>Observaciones:</strong> ${data.observaciones}</p>` : ""}
       </div>
-      <button id="boton_imprimir" onclick="imprimirVentana()">Imprimir</button>
     `;
+    window.print();
         })
         .catch(err => {
             document.getElementById('denuncia_detalle').textContent = 'Error al cargar la denuncia.';
             console.error(err);
         });
 
+        
+/*
     function imprimirVentana() {
         window.print();
     }
-
+*/
 </script>
 
 </html>
