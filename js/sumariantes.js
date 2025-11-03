@@ -85,5 +85,5 @@ function eliminarSumariante(boton) {
             console.error("Error:", error);
             alert("No se pudo eliminar el sumariante.");
         })
-        setTimeout(() => { location.reload(); }, 500);
+    setTimeout(() => { location.reload(); }, 500);
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>impresion de la denuncia</title>
+</head>
+
+<body>
+
+    <div id="denuncia_detalle"></div>
+
+</body>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const idDenuncia = parseInt(params.get('paramId'));
+
+    fetch(`http://127.0.0.1:5000/api/denuncias/${idDenuncia}`)
+        .then(res => res.json())
+        .then(data => {
+            const contenedor = document.getElementById('denuncia_detalle');
+            if (data.message) {
+                contenedor.innerHTML = `<p>${data.message}</p>`;
+                return;
+            }
+            contenedor.innerHTML = `
+      <div class="denuncia_card">
+        <h3>Denuncia N° ${data.id}</h3>
+        <p><strong>Fecha:</strong> ${data.fecha_denuncia || "Sin fecha"}</p>
+        <p><strong>Lugar:</strong> ${data.lugar_denuncia}</p>
+        <p><strong>Hecho:</strong> ${data.hecho_denuncia}</p>
+        <p><strong>Víctima:</strong> ${data.victima}</p>
+        <p><strong>Imputado:</strong> ${data.imputado}</p>
+        <p><strong>Fiscalía/Juzgado:</strong> ${data.fiscalia_juzgado}</p>
+        <p><strong>Detenido:</strong> ${data.detenido}</p>
+        ${data.observaciones ? `<p><strong>Observaciones:</strong> ${data.observaciones}</p>` : ""}
+      </div>
+      <button id="boton_imprimir" onclick="imprimirVentana()">Imprimir</button>
+    `;
+        })
+        .catch(err => {
+            document.getElementById('denuncia_detalle').textContent = 'Error al cargar la denuncia.';
+            console.error(err);
+        });
+
+    function imprimirVentana() {
+        window.print();
+    }
+
+</script>
+
+</html>

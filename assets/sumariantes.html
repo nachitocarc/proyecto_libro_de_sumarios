@@ -6,15 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sumariantes</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/sumariantes.css ">
 
 </head>
 
 <body>
-</body>
-<div>
+<div class="botones_input">
   <input type="text" id="sumariante_input" placeholder="Ingrese nombre de sumariante">
   <input type="button" value="Buscar sumariante">
-  <button onclick="agregarSumariantePopUp();">agregar sumariante</button>
+  <button onclick="agregarSumariantePopUp();" class="boton">agregar sumariante</button>
+  <button id="boton_volver" class="boton" onclick="location.href='menu.html'">Volver</button>
 </div>
 <div id="lista_sumariantes_div">
 </div>
