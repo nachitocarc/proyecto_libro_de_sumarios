@@ -75,7 +75,7 @@ function actualizarFiltroHechos() {
 
 function registrarDenuncia() {
     const denuncia = {
-        numero_denuncia: document.getElementById("input_numero").value,
+        id: document.getElementById("input_numero").value,
         fecha_denuncia: document.getElementById("input_fecha").value,
         lugar_denuncia: document.getElementById("input_lugar").value,
         hecho_denuncia: document.getElementById("select_hechos").value,
@@ -93,7 +93,7 @@ function registrarDenuncia() {
     })
         .then(res => res.json())
         .then(data => {
-            alert(`Denuncia registrada correctamente. ID: ${data.id}`);
+            alert(`Denuncia registrada correctamente.`);
             location.reload();
         })
         .catch(err => {

@@ -66,7 +66,7 @@ def add_denuncia():
         "imputado": data.get("imputado"),
         "fiscalia_juzgado": data.get("fiscalia_juzgado"),
         "detenido": data.get("detenido"),
-        "id": data.get("id")
+        "id": int(data.get("id"))
     }
 
     coleccion_denuncias.insert_one(nueva_denuncia)
