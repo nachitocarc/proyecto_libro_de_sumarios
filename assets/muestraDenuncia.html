@@ -38,19 +38,12 @@
         ${data.observaciones ? `<p><strong>Observaciones:</strong> ${data.observaciones}</p>` : ""}
       </div>
     `;
-    window.print();
+            window.print();
         })
         .catch(err => {
             document.getElementById('denuncia_detalle').textContent = 'Error al cargar la denuncia.';
             console.error(err);
         });
-
-        
-/*
-    function imprimirVentana() {
-        window.print();
-    }
-*/
 </script>
 
 </html>

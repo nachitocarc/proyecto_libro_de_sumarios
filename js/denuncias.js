@@ -41,7 +41,7 @@ function mostrarDenuncias(lista) {
                 <span class="etiqueta">${d.detenido === "Si" ? "🚨 Detenido" : "🕊️ Sin detenido"}</span>
             </div>
             <div class="denuncia_body">
-                <p><strong>Lugar:</strong> ${d.lugar_denuncia}</p>
+                <p><strong>Lugar:</strong> ${d.lugar_denuncia || "No sabemos"} </p>
                 <p><strong>Hecho:</strong> ${d.hecho_denuncia}</p>
                 <p><strong>Víctima:</strong> ${d.victima}</p>
                 <p><strong>Imputado:</strong> ${d.imputado}</p>
@@ -74,8 +74,14 @@ function actualizarFiltroHechos() {
 }
 
 function registrarDenuncia() {
+    const id = document.getElementById("input_numero").value.trim();
+
+    if (!id) {
+        alert("Debe ingresar un número de denuncia.");
+        return;}
+
     const denuncia = {
-        id: document.getElementById("input_numero").value,
+        id,
         fecha_denuncia: document.getElementById("input_fecha").value,
         lugar_denuncia: document.getElementById("input_lugar").value,
         hecho_denuncia: document.getElementById("select_hechos").value,
@@ -91,9 +97,12 @@ function registrarDenuncia() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(denuncia)
     })
-        .then(res => res.json())
-        .then(data => {
-            alert(`Denuncia registrada correctamente.`);
+        .then(res => {
+            if (!res.ok) throw new Error("Error al registrar denuncia");
+            return res.json();
+        })
+        .then(() => {
+            alert("Denuncia registrada correctamente.");
             location.reload();
         })
         .catch(err => {
@@ -101,6 +110,7 @@ function registrarDenuncia() {
             alert("No se pudo registrar la denuncia.");
         });
 }
+
 
 function cargarHechos() {
     const hechos_lista = document.getElementById('select_hechos');
