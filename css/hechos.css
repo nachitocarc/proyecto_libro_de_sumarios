@@ -1,0 +1,113 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f2f4f8;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+.botones_input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.boton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-weight: bold;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    min-width: 120px;
+    text-align: center;
+}
+
+.boton:hover {
+    background-color: #0056b3; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.boton:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
+#hechos_div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.hecho_fila {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 22px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.hecho_fila:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.hecho_fila strong {
+    color: #222;
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+}
+
+.hecho_fila span {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+.hecho_fila button {
+    background-color: #1a1314b2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    align-self: flex-start;
+}
+
+.hecho_fila button:hover {
+    background-color: #a71d2a;
+    transform: translateY(-2px);
+}
+
+.hecho_fila button:focus {
+    outline: 2px solid #a71d2a;
+    outline-offset: 2px;
+}
+
+#hecho_input{
+    width: 250px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}

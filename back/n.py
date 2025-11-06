@@ -32,6 +32,15 @@ def add_sumariante():
     coleccion_sumariantes.insert_one(nuevo_sumariante)
     return jsonify({"message": "Sumariante agregado exitosamente"}), 201
 
+@app.route('/api/sumariantes', methods=['DELETE'])
+def delete_sumariante():
+    ni_sumariante = request.json.get("ni_sumariante")
+    resultado = coleccion_sumariantes.delete_one({"ni": ni_sumariante})
+    if resultado.deleted_count > 0:
+        return jsonify({"message": "Sumariante eliminado exitosamente"}), 200
+    else:
+        return jsonify({"message": "Sumariante no encontrado"}), 404
+
 # HECHOS 
 
 @app.route('/api/hechos', methods=['GET'])
@@ -44,6 +53,15 @@ def add_hecho():
     valor_hecho = request.json
     coleccion_hechos.insert_one(valor_hecho)
     return jsonify({"message": "Hecho agregado exitosamente"}), 201
+
+@app.route('/api/hechos', methods=['DELETE'])
+def delete_hecho():
+    nombre_hecho = request.json.get("nombre")
+    resultado = coleccion_hechos.delete_one({"nombre": nombre_hecho})
+    if resultado.deleted_count > 0:
+        return jsonify({"message": "Hecho eliminado exitosamente"}), 200
+    else:
+        return jsonify({"message": "Hecho no encontrado"}), 404
 
 #  DENUNCIAS 
 

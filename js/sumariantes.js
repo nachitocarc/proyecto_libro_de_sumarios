@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             `);
 
-            contenedor.innerHTML = filas.join('<br>');
+            contenedor.innerHTML = filas.join('');
         })
         .catch(error => {
             console.error('Ocurrió un error:', error);
