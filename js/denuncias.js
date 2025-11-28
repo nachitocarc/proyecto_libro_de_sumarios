@@ -43,8 +43,8 @@ function mostrarDenuncias(lista) {
             <div class="denuncia_body">
                 <p><strong>Lugar:</strong> ${d.lugar_denuncia || "No sabemos"} </p>
                 <p><strong>Hecho:</strong> ${d.hecho_denuncia}</p>
-                <p><strong>Víctima:</strong> ${d.victima}</p>
-                <p><strong>Imputado:</strong> ${d.imputado}</p>
+                <p><strong>Víctima:</strong> ${d.victima || "NN"}</p>
+                <p><strong>Imputado:</strong> ${d.imputado || "NN"}</p>
             </div>
             <div class="denuncia_body">
                 <button class="btn_imprimir" onclick="abrirVentanaDenuncia(${d.id})">Imprimir Denuncia</button>
