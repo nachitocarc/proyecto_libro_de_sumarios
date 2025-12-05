@@ -42,7 +42,6 @@ def delete_sumariante():
         return jsonify({"message": "Sumariante no encontrado"}), 404
 
 # HECHOS 
-
 @app.route('/api/hechos', methods=['GET'])
 def get_hechos():
     hechos = list(coleccion_hechos.find({}, {'_id': 0}))
@@ -64,6 +63,13 @@ def delete_hecho():
         return jsonify({"message": "Hecho no encontrado"}), 404
 
 #  DENUNCIAS 
+def get_next_id():
+    contador = db.counters.find_one_and_update(
+        {"_id": "denunciaId"},
+        {"$inc": {"seq": 1}},
+        return_document=True
+    )
+    return contador["seq"]
 
 @app.route('/api/denuncias', methods=['GET'])
 def get_denuncias():
@@ -84,7 +90,7 @@ def add_denuncia():
         "imputado": data.get("imputado"),
         "fiscalia_juzgado": data.get("fiscalia_juzgado"),
         "detenido": data.get("detenido"),
-        "id": int(data.get("id"))
+        "id": get_next_id()
     }
 
     coleccion_denuncias.insert_one(nueva_denuncia)

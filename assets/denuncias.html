@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
   <button id="abrir_modal">Nueva denuncia</button>
   <button id="boton_volver" onclick="location.href='menu.html'">Volver</button>
 
@@ -17,42 +18,44 @@
     <h2>Denuncias</h2>
 
     <label for="filtro_hecho"><strong>Filtrar por hecho:</strong></label>
-    <select id="filtro_hecho">
-      <option value="todos">Todos</option>
-    </select>
+
+    <div class="filtros-grid">
+      <select id="filtro_hecho">
+        <option value="todos">Todos</option>
+      </select>
+
+      <input type="text" id="filtroImputado" placeholder="Filtrar por imputado...">
+      <input type="text" id="filtroVictima" placeholder="Filtrar por víctima...">
+      <input type="date" id="filtroFecha">
+    </div>
 
     <div id="denuncias_lista"></div>
   </div>
 
   <form>
     <div id="modal" class="modal" style="display: none;">
-
-
       <div class="modal_contenido">
         <div class="modal_nombre">
           <h3>Nueva denuncia</h3>
           <span class="cerrar" id="cerrar_modal">&times;</span>
         </div>
-        <input type="number" placeholder="ingrese id" id="input_numero">
 
         <label for="input_fecha">Fecha</label>
         <input type="date" id="input_fecha">
 
         <label for="input_lugar">Lugar</label>
-        <input type="text" placeholder="Ingrese el lugar" id="input_lugar">
+        <input type="text" id="input_lugar">
 
         <label for="input_victima">Víctima</label>
-        <input type="text" placeholder="Ingrese la víctima" id="input_victima">
+        <input type="text" id="input_victima">
 
         <label for="input_imputado">Imputado</label>
-        <input type="text" placeholder="Ingrese el imputado" id="input_imputado">
+        <input type="text" id="input_imputado">
 
         <label for="select_hechos">Hechos</label>
+        <select id="select_hechos"></select>
 
-        <select id="select_hechos">
-        </select>
-
-        <label for="select_detenido">Detenido</label>
+        <label for="select_detenid o">Detenido</label>
         <select id="select_detenido">
           <option value="disabled">Seleccione una opción</option>
           <option value="Si">Sí</option>
@@ -67,7 +70,7 @@
         </select>
 
         <label for="input_observaciones">Observaciones</label>
-        <textarea id="input_observaciones" placeholder="Ingrese observaciones"></textarea>
+        <textarea id="input_observaciones"></textarea>
 
         <p>Sumariante</p>
 

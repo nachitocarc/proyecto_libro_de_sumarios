@@ -15,7 +15,15 @@
 
 <script>
     const params = new URLSearchParams(window.location.search);
-    const idDenuncia = parseInt(params.get('paramId'));
+    const idParam = params.get('paramId');
+
+    if (!idParam || isNaN(parseInt(idParam))) {
+        document.getElementById('denuncia_detalle').innerHTML =
+            "<p>Error: ID de denuncia inválido.</p>";
+        throw new Error("ID inválido");
+    }
+
+    const idDenuncia = parseInt(idParam);
 
     fetch(`http://127.0.0.1:5000/api/denuncias/${idDenuncia}`)
         .then(res => res.json())

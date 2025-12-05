@@ -135,3 +135,24 @@ textarea {
     max-height: 150px;
     overflow-y: hidden;
 }
+
+#denuncias_contenedor {
+    margin-bottom: 20px;
+}
+
+.filtros-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.filtros-grid select,
+.filtros-grid input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
