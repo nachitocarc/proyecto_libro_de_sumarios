@@ -77,6 +77,15 @@
         <input type="button" value="REGISTRAR DENUNCIA" id="registrar_denuncia" onclick="registrarDenuncia()">
       </div>
     </div>
+
+    <div id="modal_elevacion" class="modal" style="display:none;">
+      <div class="modal_contenido">
+        <h3>Elevar denuncia</h3>
+        <input type="date" id="fecha_elevacion">
+        <button onclick="confirmarElevacion()">Confirmar</button>
+        <button onclick="cerrarModalElevacion()">Cancelar</button>
+      </div>
+    </div>
   </form>
 
   <script src="../js/denuncias.js" defer></script>

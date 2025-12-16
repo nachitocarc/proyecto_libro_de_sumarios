@@ -50,10 +50,12 @@ function mostrarDenuncias(lista) {
                 <p><strong>Hecho:</strong> ${d.hecho_denuncia}</p>
                 <p><strong>Víctima:</strong> ${d.victima || "NN"}</p>
                 <p><strong>Imputado:</strong> ${d.imputado || "NN"}</p>
+                <p><strong>Fecha elevación:</strong> ${d.fecha_elevacion || "No elevada"}</p>
             </div>
             <div class="denuncia_body">
                 <button class="btn_imprimir" onclick="abrirVentanaDenuncia(${d.id})">Imprimir Denuncia</button>
-            </div>
+                <button onclick="abrirModalElevacion(${d.id})">📤 Elevar</button>
+                </div>
         </div>
     `);
 
@@ -165,3 +167,23 @@ function abrirVentanaDenuncia(id) {
 filtroImputado.addEventListener("input", aplicarFiltros);
 filtroVictima.addEventListener("input", aplicarFiltros);
 filtroFecha.addEventListener("change", aplicarFiltros);
+
+function abrirModalElevacion(id) {
+    denunciaActual = id;
+    document.getElementById("modal_elevacion").style.display = "block";
+}
+
+function cerrarModalElevacion() {
+    document.getElementById("modal_elevacion").style.display = "none";
+}
+
+function confirmarElevacion() {
+    const fecha = document.getElementById("fecha_elevacion").value;
+
+    fetch(`http://127.0.0.1:5000/api/denuncias/${denunciaActual}/fecha-elevacion`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({fecha_elevacion: fecha})
+    })
+    .then(() => location.reload());
+}

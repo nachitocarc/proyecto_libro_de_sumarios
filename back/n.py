@@ -5,6 +5,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+ADMIN_NI = ["911", "123"]
+
 
 ### MONGUITO
 mongo_uri = "mongodb://localhost:27017/"
@@ -40,6 +42,31 @@ def delete_sumariante():
         return jsonify({"message": "Sumariante eliminado exitosamente"}), 200
     else:
         return jsonify({"message": "Sumariante no encontrado"}), 404
+    
+    
+@app.route('/api/login', methods=['POST'])
+def login():
+    ni = request.json.get("ni")
+
+    if not ni:
+        return jsonify({"message": "NI requerido"}), 400
+
+    if ni in ADMIN_NI:
+        return jsonify({
+            "rol": "administrador",
+            "ni": ni
+        }), 200
+
+    sumariante = coleccion_sumariantes.find_one({"ni": ni}, {"_id": 0})
+
+    if sumariante:
+        return jsonify({
+            "rol": "sumariante",
+            "sumariante": sumariante
+        }), 200
+
+    return jsonify({"message": "NI no válido"}), 401
+
 
 # HECHOS 
 @app.route('/api/hechos', methods=['GET'])
@@ -103,6 +130,23 @@ def get_denuncia_by_id(id):
         return jsonify(denuncia)
     else:
         return jsonify({"message": "Denuncia no encontrada"}), 404
+
+@app.route('/api/denuncias/<int:id>/fecha-elevacion', methods=['PUT'])
+def actualizar_fecha_elevacion(id):
+    fecha_elevacion = request.json.get("fecha_elevacion")
+
+    if not fecha_elevacion:
+        return jsonify({"message": "Fecha de elevación requerida"}), 400
+
+    resultado = coleccion_denuncias.update_one(
+        {"id": id},
+        {"$set": {"fecha_elevacion": fecha_elevacion}}
+    )
+
+    if resultado.matched_count == 0:
+        return jsonify({"message": "Denuncia no encontrada"}), 404
+
+    return jsonify({"message": "Fecha de elevación actualizada"}), 200
 
 
 if __name__ == '__main__':

@@ -38,18 +38,20 @@
             </h1>
         </div>
     </div>
-<!-- <script >
-    document.addEventListener('DOMContentLoaded', function() {
-    var ni = localStorage.getItem('numero_identificatorio');
-    var gestion_hechos = document.getElementById('div_hechos');
-    var gestion_sumariantes = document.getElementById('div_sumariantes');
-    if (ni === '123') {
-        if (gestion_hechos) gestion_hechos.style.display = 'block';
-        if (gestion_sumariantes) gestion_sumariantes.style.display = 'block';
-    }
-});
-</script>
- -->
+
+    <script>
+        const rol = localStorage.getItem("rol");
+
+        if (!rol) {
+            location.href = "../index.html";
+        }
+
+        if (rol === "sumariante") {
+            document.getElementById("div_hechos").style.display = "none";
+            document.getElementById("div_sumariantes").style.display = "none";
+        }
+    </script>
+
 </body>
 
 </html>
